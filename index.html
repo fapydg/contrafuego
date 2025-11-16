@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTRAFUEGO | Diseño y memoria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fuego-bg': '#0a0a0a',
+                        'fuego-rojo': '#e53935',
+                        'fuego-tierra': '#cd5c09',
+                        'fuego-gris': '#333333',
+                        'fuego-papel': '#f5f5f0',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        'latido-ancestral': {
+                            '0%, 100%': { fill: '#e53935', transform: 'scale(1)' },      
+                            '33%': { fill: '#cd5c09', transform: 'scale(1.02)' },        
+                            '66%': { fill: '#f5f5f0', transform: 'scale(0.98)' },        
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'glifo-vivo': 'latido-ancestral 4s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f0;
+            overflow-x: hidden; 
+        }
+        .scroll-block {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .scroll-block.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+        .legal-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 4px 8px;
+            border: 1px solid #333;
+            background-color: rgba(10, 10, 10, 0.8);
+            color: #aaa;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+        .horizontal-scroll-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
+        }
+        .horizontal-scroll-container::-webkit-scrollbar {
+            display: none; 
+        }
+        .glifo-svg {
+            height: 1.2em; 
+            width: auto;
+            display: block;
+        }
+        /* Estilos para el video responsivo */
+        .intro-video {
+            width: 100%; 
+            height: auto; 
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-fuego-bg bg-noise">
+
+    <!-- NAVEGACIÓN SUPERIOR -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center mix-blend-difference">
+        <div class="font-mono text-xs uppercase tracking-widest text-fuego-papel/50">
+            UNR FAPyD | LPP 2025
+        </div>
+        
+        <!-- ISOLOGO GLIFO "G" (RESTAURADO: SOLO EL GLIFO) -->
+        <div class="text-fuego-rojo hover:scale-110 transition-transform duration-300 cursor-pointer" title="CONTRAFUEGO">
+            <svg class="h-8 w-auto" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M90 20 H20 V80 H80 V50 H50 V65 H65 V60 H70 V70 H30 V30 H90 V20 Z" />
+            </svg>
+        </div>
+    </nav>
+
+    <!-- HERO: EL UMBRAL -->
+    <section id="intro" class="h-screen flex flex-col items-center justify-center relative px-6">
+        <div class="max-w-5xl w-full flex flex-col items-center z-10 animate-fade-in-up">
+            <p class="font-mono text-fuego-tierra text-xs md:text-sm tracking-[0.3em] mb-12 text-center">
+                [ EXPEDIENTE Nº 500 - MEMORIA ACTIVA ]
+            </p>
+            
+            <!-- CAJA DEL LOGOTIPO -->
+            <div class="flex flex-col items-center justify-center mb-16 select-none w-full">
+                <h1 class="font-mono text-4xl md:text-7xl lg:text-8xl leading-none text-fuego-papel tracking-[0.2em] md:tracking-[0.35em] text-center ml-2 md:ml-4">
+                    CONTRA
+                </h1>
+                <div class="flex justify-between items-center w-full max-w-[280px] md:max-w-[580px] lg:max-w-[780px] mt-2 md:mt-6 px-1">
+                    <svg class="glifo-svg h-12 md:h-24 lg:h-32 animate-glifo-vivo" style="animation-delay: 0s;" viewBox="0 0 100 100" fill="currentColor"><path d="M20 10 H80 V30 H50 V40 H70 V60 H50 V100 H20 V10 Z" /></svg>
+                    <svg class="glifo-svg h-12 md:h-24 lg:h-32 animate-glifo-vivo" style="animation-delay: 0.5s;" viewBox="0 0 100 100" fill="currentColor"><path d="M20 10 V70 Q20 90 50 90 Q80 90 80 70 V10 H60 V70 H40 V10 H20 Z" /></svg>
+                    <svg class="glifo-svg h-12 md:h-24 lg:h-32 animate-glifo-vivo" style="animation-delay: 1s;" viewBox="0 0 100 100" fill="currentColor"><path d="M80 10 H20 V90 H80 V70 H40 V60 H70 V40 H40 V30 H80 V10 Z" /></svg>
+                    <svg class="glifo-svg h-12 md:h-24 lg:h-32 animate-glifo-vivo" style="animation-delay: 1.5s;" viewBox="0 0 100 100" fill="currentColor"><path d="M90 20 H20 V80 H80 V50 H50 V65 H65 V60 H70 V70 H30 V30 H90 V20 Z" /></svg>
+                    <svg class="glifo-svg h-12 md:h-24 lg:h-32 animate-glifo-vivo" style="animation-delay: 2s;" viewBox="0 0 100 100" fill="currentColor"><path d="M50 10 L90 50 L50 90 L10 50 Z M50 30 L70 50 L50 70 L30 50 Z" /></svg>
+                </div>
+            </div>
+
+            <!-- TEXTO DE BAJADA -->
+            <div class="text-center max-w-3xl mx-auto px-4">
+                <p class="text-lg md:text-xl font-light text-fuego-papel/80 leading-relaxed">
+                    <span class="font-sans block mb-3">La historia oficial no pidió permiso.</span>
+                    <span class="font-serif italic text-fuego-tierra block">Nosotros somos la auditoría.</span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-12 animate-bounce opacity-50">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 1: POSICIONAMIENTO -->
+    <section id="posicionamiento" class="min-h-screen flex items-center px-6 sm:px-12 lg:px-24 py-24 scroll-block">
+        <div class="grid md:grid-cols-12 gap-16 items-center w-full max-w-7xl mx-auto">
+            <div class="md:col-span-5 relative group">
+                <figure class="relative transition-transform duration-700 group-hover:scale-[1.02]">
+                    <div class="absolute inset-0 border border-fuego-rojo/30 translate-x-4 translate-y-4 -z-10 transition-transform duration-700 group-hover:translate-x-6 group-hover:translate-y-6"></div>
+                    <img 
+                        src="https://artishockrevista.com/wp-content/uploads/2015/09/torresgarcia40.jpg" 
+                        alt="Obra de Torres García - Contrafuego" 
+                        class="w-full grayscale contrast-125 brightness-90"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x800/333333/f5f5f0?text=J.T.GARCIA%20(1943)';">
+                    <figcaption class="legal-badge mt-4">
+                        FIG.1 | AUTOR: J.T.GARCIA (1943) | LICENCIA: DOMINIO PÚBLICO (URUGUAY)
+                    </figcaption>
+                </figure>
+            </div>
+            <div class="md:col-span-7">
+                <h2 class="font-serif text-5xl md:text-6xl leading-tight mb-8">
+                    Nuestro Norte es <br> <span class="text-fuego-tierra italic">la Trinchera del Sur.</span>
+                </h2>
+                <div class="prose prose-invert prose-lg text-fuego-papel/80">
+                    <p>
+                        Desde Rosario, mirando al Paraná que también es vena abierta, entendemos que la verticalidad impuesta por Europa fue el primer acto de despojo. Nos dijeron que estábamos "abajo", al margen del mapa.
+                    </p>
+                    <p>
+                        <strong>CONTRAFUEGO</strong> adopta la tesis de Torres García no como metáfora estética, sino como doctrina política. Invertir el mapa es un acto de justicia epistemológica. Es declarar que nuestra memoria no es periferia; es el centro desde donde diseñamos el futuro.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: MARCO TEÓRICO -->
+    <section id="teoria" class="py-32 bg-fuego-papel text-fuego-bg scroll-block overflow-hidden">
+        <div class="px-6 sm:px-12 lg:px-24 mb-16">
+            <span class="font-mono text-xs tracking-widest text-fuego-rojo block mb-4">[ MARCO TEÓRICO ]</span>
+            <h2 class="font-serif text-5xl md:text-6xl">Diseño vs. Olvido</h2>
+            <p class="max-w-2xl mt-6 text-lg text-fuego-bg/70">
+                El diseño gráfico no es inocente. O es herramienta de la amnesia consumista, o es instrumento de la memoria activa. Este proyecto es nuestro "emprendimiento creativo" (Rubio, 2018): elegimos trinchera.
+            </p>
+        </div>
+
+        <div class="horizontal-scroll-container flex px-6 sm:px-12 lg:px-24 space-x-8 md:space-x-16 pb-16">
+            <div class="min-w-[85vw] md:min-w-[40vw] bg-[#e8e8e0] p-8 md:p-12 border-l-4 border-fuego-rojo flex flex-col justify-between">
+                <div>
+                    <h3 class="font-serif text-3xl mb-6">¿Cómo interviene el diseño en la memoria colectiva?</h3>
+                    <p class="text-lg leading-relaxed text-fuego-bg/80">
+                        El diseño <strong>tangibiliza</strong> lo invisible. La memoria es frágil si solo es oral; el diseño la fija en soportes (afiches, webs, marcas) que disputan el espacio público. Interviene transformando el "recuerdo nostálgico" en <strong>acción política presente</strong>. No es diseñar "sobre" el pasado, es diseñar "desde" él para construir nuestra identidad y *proyecto profesional*.
+                    </p>
+                    <blockquote class="mt-6 border-l-2 border-fuego-bg/50 pl-4 italic text-fuego-bg/60 text-base">
+                        "Construir el propio proyecto profesional y de vida contribuye a la construcción social de la identidad profesional."
+                    </blockquote>
+                </div>
+                <span class="font-mono text-xs text-fuego-bg/40 mt-8">[ REF. CÁTEDRA: RODRÍGUEZ MORENO, 2011 ]</span>
+            </div>
+            <div class="min-w-[85vw] md:min-w-[40vw] bg-[#e8e8e0] p-8 md:p-12 border-l-4 border-fuego-tierra flex flex-col justify-between">
+                <div>
+                    <h3 class="font-serif text-3xl mb-6">¿Qué proyectos fortalecen la memoria social?</h3>
+                    <p class="text-lg leading-relaxed text-fuego-bg/80">
+                        Aquellos que rompen la jerarquía "experto-usuario" y construyen <strong>horizontalidad</strong>. Proyectos colaborativos donde la comunidad no es "objeto de estudio" sino co-autora. Esta metodología se alinea con una *lógica de valor* (Greffe, 2016) centrada en la comunidad y la co-creación, superando la simple "cadena de valor" industrial.
+                    </p>
+                    <blockquote class="mt-6 border-l-2 border-fuego-bg/50 pl-4 italic text-fuego-bg/60 text-base">
+                        "Las empresas creativas están muy próximas a la tienda de valor... crea vínculos muy específicos entre los vendedores y los compradores."
+                    </blockquote>
+                </div>
+                <span class="font-mono text-xs text-fuego-bg/40 mt-8">[ REF. CÁTEDRA: GREFFE, 2016 ]</span>
+            </div>
+            <div class="min-w-[85vw] md:min-w-[40vw] bg-[#e8e8e0] p-8 md:p-12 border-l-4 border-fuego-bg flex flex-col justify-between">
+                <div>
+                    <h3 class="font-serif text-3xl mb-6">¿Es capaz el diseño de difundir memoria?</h3>
+                    <p class="text-lg leading-relaxed text-fuego-bg/80">
+                        Absolutamente. El diseño tiene la capacidad viral de sintetizar complejidades históricas en símbolos potentes. Pero su mayor poder no es solo difundir, sino <strong>activar</strong>. Un buen diseño de memoria no te deja tranquilo; te incomoda, te obliga a tomar posición. Es un contrafuego contra la indiferencia y la *principal herramienta* de nuestra empresa creativa.
+                    </p>
+                    <blockquote class="mt-6 border-l-2 border-fuego-bg/50 pl-4 italic text-fuego-bg/60 text-base">
+                        "[Empresas creativas] tienen su origen en la creatividad, habilidad y talento individuales, y... un potencial de creación de riqueza... mediante la... explotación de la propiedad intelectual."
+                    </blockquote>
+                </div>
+                <span class="font-mono text-xs text-fuego-bg/40 mt-8">[ REF. CÁTEDRA: GREFFE, 2016 | RUBIO, 2018 ]</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: NOTA ORIGINAL -->
+    <section id="nota" class="px-6 sm:px-12 lg:px-24 py-32 bg-[#0f0f0f] scroll-block">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-between items-end border-b border-fuego-gris pb-4 mb-16 font-mono text-xs text-fuego-tierra/60">
+                <span>[ CRÓNICA DE CAMPO ]</span>
+                <span>AUTORES: ESTUDIANTES UNR FAPYD</span>
+            </div>
+
+            <h1 class="font-serif text-5xl md:text-7xl mb-8 leading-none">
+                Del Paraná a la Puna: <br> <span class="text-fuego-rojo">La persistencia del barro.</span>
+            </h1>
+            <p class="font-mono text-fuego-papel/50 mb-16 text-sm">
+                FECHA: OCTUBRE 2025 | LECTURA: 6 MIN | LICENCIA: CC BY-NC-SA 4.0
+            </p>
+
+            <div class="prose prose-invert prose-lg max-w-none font-light">
+                <p class="lead text-2xl text-fuego-papel/90 mb-12 font-serif italic">
+                    Salimos de Rosario con la bajante histórica del río mostrándonos las heridas del lecho. Llegamos a Jujuy y entendimos que la sequía no es solo de agua, es de memoria. Pero en ambos extremos, algo persiste en el barro.
+                </p>
+                <p>
+                    Caminar por la Puna no es turismo, es arqueología viviente. El polvo que se levanta aquí tiene 500 años de antigüedad. No buscamos paisajes para Instagram; buscamos testimonios para un expediente judicial imaginario contra el olvido.
+                </p>
+                <p>
+                    En Tilcara, Doña América —"Meca" entre los suyos— no nos dio una entrevista; nos dio una lección de derecho. Mientras tejía con técnicas que ninguna universidad enseña, nos dijo: <span class="text-fuego-papel font-medium">"Ustedes buscan papeles. Nosotros tenemos la tierra. La tierra tiene mejor memoria que el papel, porque el papel se quema, pero la tierra siempre vuelve a cubrirlo todo"</span>.
+                </p>
+                <blockquote class="border-l-4 border-fuego-tierra pl-8 my-12 py-2 font-serif text-3xl text-fuego-papel">
+                    "Ellos dicen que desaparecimos. Pero cada mañana, cuando saludo al sol, les demuestro que su mapa sigue estando equivocado."
+                </blockquote>
+                <p>
+                    Volvimos a la facultad con más preguntas que respuestas. ¿Cómo diseñamos sin traicionar esa profundidad? ¿Cómo usamos las herramientas digitales (las del colonizador moderno) para contar estas verdades de tierra? Entendimos entonces que <strong>CONTRAFUEGO</strong> no podía ser solo una marca bonita. Tenía que ser un compromiso ético: no robar esas historias, sino amplificarlas, siempre citando la fuente, siempre pidiendo permiso a la tierra.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 4: PIEZA GRÁFICA (FIXED) -->
+    <section id="grafica" class="py-32 px-6 sm:px-12 lg:px-24 scroll-block bg-fuego-bg">
+        <div class="text-center mb-8">
+            <span class="font-mono text-xs tracking-widest text-fuego-rojo">[ EVIDENCIA GRÁFICA ]</span>
+        </div>
+        
+        <!-- Contenedor del Video -->
+        <div class="w-full max-w-7xl mx-auto relative border border-fuego-gris/30 bg-[#111] overflow-hidden group mb-4">
+            <div style="padding:56.25% 0 0 0;position:relative;">
+                <iframe src="https://player.vimeo.com/video/1137339041?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="audiovisual_contrafuego"></iframe>
+            </div>
+            <script src="https://player.vimeo.com/api/player.js"></script>
+        </div>
+
+        <!-- AUDITORÍA LPP -->
+        <div class="w-full max-w-7xl mx-auto flex justify-end">
+            <div class="text-right font-mono text-[10px] text-fuego-papel/50 leading-snug max-w-4xl">
+                <p class="text-fuego-tierra mb-1 font-bold tracking-wider">[ AUDITORÍA DE RECURSOS ]</p>
+                <p class="mb-1">GENERACIÓN: VEO 3.1 (GOOGLE AI) — MÉTODO: PROMPTS / DIRECCIÓN CREATIVA</p>
+                <p>
+                    <span class="text-fuego-tierra/70 mr-1">[ AUDIO ]</span> 
+                    VOZ EN OFF: "Los Nadies" (E. Galeano, Derecho de Cita) — MÚSICA: "Amelia" (M. Llobet, Dominio Público).
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 5: RECURSO CURADO -->
+    <section id="recurso" class="py-32 px-6 sm:px-12 lg:px-24 bg-fuego-papel text-fuego-bg scroll-block">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-5">
+                <span class="font-mono text-xs tracking-widest text-fuego-rojo mb-4 block">[ FUENTE EXTERNA ]</span>
+                <h2 class="font-serif text-5xl mb-8">Manual de Instrucciones</h2>
+                <p class="text-lg font-light leading-relaxed text-fuego-bg/80 mb-8">
+                    Para desarmar la máquina del olvido, primero hay que entender cómo fue ensamblada. Esta obra es el plano detallado del saqueo. Fundamental para cualquier diseñador que pretenda operar en Latinoamérica.
+                </p>
+                <a href="https://www.sigloxxieditores.com.ar/libro/las-venas-abiertas-de-america-latina/" target="_blank" class="inline-flex items-center font-mono text-sm uppercase tracking-widest text-fuego-tierra border-b border-fuego-tierra pb-1 hover:text-fuego-bg hover:border-fuego-bg transition">
+                    Acceder a fuente editorial
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+            <div class="md:col-span-7">
+                <div class="bg-[#e8e8e0] p-8 md:p-12 border-2 border-fuego-bg shadow-[6px_6px_0px_0px_rgba(10,10,10,1)] md:shadow-[12px_12px_0px_0px_rgba(10,10,10,1)] relative">
+                    <div class="md:absolute md:top-4 md:right-4 mb-6 md:mb-0 legal-badge bg-fuego-bg/10 text-fuego-bg/60 border-fuego-bg/20">
+                        USO BAJO DOCTRINA DE CITA (FAIR USE)
+                    </div>
+                    <h3 class="font-serif text-3xl md:text-4xl font-bold mb-2">Las Venas Abiertas de América Latina</h3>
+                    <p class="font-mono text-sm mb-8 text-fuego-bg/60">AUTOR: Eduardo Galeano | AÑO: 1971</p>
+                    <blockquote class="font-serif text-xl italic leading-relaxed border-l-2 border-fuego-rojo pl-6 text-fuego-bg/80">
+                        "La historia es un profeta con la mirada vuelta hacia atrás: por lo que fue, y contra lo que fue, anuncia lo que será."
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-24 px-6 sm:px-12 lg:px-24 bg-[#050505] text-fuego-gris text-sm font-mono scroll-block">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
+            <div class="col-span-2 pr-12">
+                <!-- ISOLOGOTIPO HÍBRIDO -->
+                <div class="flex items-center gap-1 text-fuego-rojo mb-6 select-none" title="CONTRAFUEGO">
+                    <span class="font-mono font-bold tracking-widest text-2xl leading-none">CONTRA</span>
+                    <div class="flex items-center space-x-[1px]">
+                        <svg class="h-6 w-auto" viewBox="0 0 100 100" fill="currentColor"><path d="M20 10 H80 V30 H50 V40 H70 V60 H50 V100 H20 V10 Z" /></svg>
+                        <svg class="h-6 w-auto" viewBox="0 0 100 100" fill="currentColor"><path d="M20 10 V70 Q20 90 50 90 Q80 90 80 70 V10 H60 V70 H40 V10 H20 Z" /></svg>
+                        <svg class="h-6 w-auto" viewBox="0 0 100 100" fill="currentColor"><path d="M80 10 H20 V90 H80 V70 H40 V60 H70 V40 H40 V30 H80 V10 Z" /></svg>
+                        <svg class="h-6 w-auto" viewBox="0 0 100 100" fill="currentColor"><path d="M90 20 H20 V80 H80 V50 H50 V65 H65 V60 H70 V70 H30 V30 H90 V20 Z" /></svg>
+                        <svg class="h-6 w-auto" viewBox="0 0 100 100" fill="currentColor"><path d="M50 10 L90 50 L50 90 L10 50 Z M50 30 L70 50 L50 70 L30 50 Z" /></svg>
+                    </div>
+                </div>
+
+                <p class="leading-relaxed text-fuego-papel/60 max-w-md mb-4">
+                    Plataforma académica de auditoría y memoria visual. 
+                </p>
+                <p class="leading-relaxed text-fuego-papel/40 text-xs max-w-md">
+                    Este sitio web es un ejercicio académico realizado por estudiantes de la UNR. No persigue fines de lucro comercial. Su objetivo es la investigación y la práctica profesional en diseño y comunicación visual.
+                </p>
+            </div>
+            <div>
+                <h5 class="text-fuego-papel mb-6 uppercase tracking-widest">Créditos</h5>
+                <ul class="space-y-4 text-fuego-papel/60">
+                    <li>
+                        <span class="text-fuego-tierra block font-bold text-xs tracking-wider uppercase mb-1">Dirección de Arte y Narrativa:</span>
+                        Jordán Trinch
+                    </li>
+                    <li>
+                        <span class="text-fuego-tierra block font-bold text-xs tracking-wider uppercase mb-1">Equipo de Investigación:</span>
+                        Guillermo Torra Zalazar, Tomás Vallet, Valentino Tabares, Francisco Urrutia
+                    </li>
+                    <li>
+                        <span class="text-fuego-tierra block font-bold text-xs tracking-wider uppercase mb-1">Cátedra LPP | Equipo docente:</span>
+                        LDCV Mariana Oliva<br>
+                        Mg. Dg Abog. Sergio Bentivegna
+                    </li>
+                </ul>
+            </div>
+            <div>
+                 <h5 class="text-fuego-papel mb-6 uppercase tracking-widest border-b border-fuego-gris pb-2">MARCO LEGAL Y LICENCIAS</h5>
+                 <ul class="space-y-4 text-fuego-papel/60 text-xs leading-relaxed mt-4">
+                    <li>
+                        <strong class="text-fuego-papel/90 block mb-1">1. TIPOGRAFÍAS (OFL):</strong>
+                        'Inter', 'JetBrains Mono' y 'Playfair Display' utilizadas bajo Open Font License. Uso libre y gratuito.
+                    </li>
+                    <li>
+                        <strong class="text-fuego-papel/90 block mb-1">2. LIBRERÍAS DE CÓDIGO (MIT):</strong>
+                        Framework Tailwind CSS v3.4. Licencia MIT (Código Abierto).
+                    </li>
+                     <li>
+                        <strong class="text-fuego-papel/90 block mb-1">3. IMÁGENES DE ARCHIVO:</strong>
+                        Fig.1 (Obra J.T.García) se encuentra en Dominio Público (Art. 5 Ley 11.723) tras cumplirse 70 años post-mortem del autor.
+                    </li>
+                     <li>
+                        <strong class="text-fuego-papel/90 block mb-1">4. DERECHO DE CITA:</strong>
+                        Citas textuales (Galeano, Greffe, Rubio) utilizadas con fines didácticos bajo la Doctrina de Cita (Art. 10 Convenio de Berna).
+                    </li>
+                     <li>
+                        <strong class="text-fuego-papel/90 block mb-1">5. PROPIEDAD INTELECTUAL (OBRA):</strong>
+                        <span class="block mt-1 p-2 border border-fuego-gris bg-fuego-gris/10">
+                            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="hover:text-fuego-rojo transition-colors">
+                                LICENCIA CC BY-NC-SA 4.0
+                            </a><br>
+                            Esta obra está bajo una Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional.
+                        </span>
+                    </li>
+                    <li>
+                        <strong class="text-fuego-papel/90 block mb-1">6. MARCA Y DOMINIO:</strong>
+                        Marca [CONTRAFUEGO] y dominios web verificados como disponibles para este proyecto (Simulación INPI/NIC).
+                    </li>
+                 </ul>
+            </div>
+        </div>
+        <div class="mt-24 pt-8 border-t border-fuego-gris/20 text-center text-fuego-papel/30 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+             <p>Universidad Nacional de Rosario - Facultad de Arquitectura, Planeamiento y Diseño</p>
+             <p>Legislación y Práctica Profesional | 2025</p>
+        </div>
+
+        <!-- INFORME TÉCNICO - ENLACE ADICIONAL (AJUSTADO) -->
+        <div class="mt-12 pt-8 border-t border-fuego-gris/20 text-center">
+            <a href="https://fapydg.github.io/contrafuego-informe/" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="font-mono text-xs text-fuego-papel/50 hover:text-fuego-tierra transition-colors uppercase tracking-widest inline-flex items-center group mx-auto">
+                Ver: INFORME TÉCNICO
+                <span class="ml-2 transition-transform duration-300 group-hover:translate-x-2 transform-gpu">
+                    &rarr;
+                </span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-block').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
